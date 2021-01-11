@@ -1,0 +1,12 @@
+#%RAML 1.0 Library
+usage: All file and folder included exept documentation,extention and overlay
+types:
+ productdatatype: !include DataType/products.raml
+ userdatatypes: !include DataType/userdataType.raml
+traits:
+ traitesduplication: !include traits/duplication.raml
+
+resourceTypes:
+  collection: !include resourcetype/get.raml
+securitySchemes:
+  security: !include securityScheme.raml

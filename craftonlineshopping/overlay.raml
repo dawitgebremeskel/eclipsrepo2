@@ -1,0 +1,23 @@
+#%RAML 1.0 Overlay
+extends: craftonlineshopping.raml
+title: onlin shopping overview
+documentation:
+  - title: overview
+    content: the document defins about online shopping.
+    /product:
+      content: the product type is laptop
+    /user:
+      content: the customer who by the company product.
+    /order:
+      content: purchase order for the company product.
+    /catagory:
+      content: classifing the prodact type by model.
+
+usage:     
+ mediaType: 
+ - application/json
+ baseUriParameters:
+   userid and productid
+description: this is all about documentation and explanation as an additional document about the nodes of RAML.
+
+

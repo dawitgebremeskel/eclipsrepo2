@@ -1,0 +1,45 @@
+#%RAML 1.0 SecurityScheme
+type: OAuth 2.0
+description: This API supports oath authentication security
+describedBy:
+  headers:
+    Authorization: 
+     description: user has to be send token to the server
+     type: string
+  queryParameters:
+     access-token:
+       description: user have to send valid access token
+       type: string
+  responses:
+    401:
+      description: invalid token is used
+    403:
+      description: your token has expaired 
+
+         
+# type: Basic Authentication
+# description: craft online shopping rest API basic authontication
+# describedBy:
+#   queryParameters:
+#     username:
+#       description: username
+#       type: string
+#       required: true
+#       maxLength: 10
+#       minLength: 5
+#       example: daveeee
+
+#     password:
+#       description: username
+#       type: string
+#       required: true
+#       maxLength: 10
+#       minLength: 3
+#       example: password
+
+
+
+
+
+        
+

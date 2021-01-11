@@ -1,0 +1,92 @@
+#%RAML 1.0 Extension
+extends: craftonlineshopping.raml
+/product:
+  description: Admin product
+  get:
+    responses:
+      200:
+        body:
+          application/json:  
+           example:
+            {
+             message:admin get all productes.
+            }
+      401:
+        body:
+          application/json:
+            example:
+                 {
+                     message:"You don't have admin privilage"
+                 }   
+      404:
+          description: not found
+          body:
+            application/json:
+              example:
+                {
+                  message:"not found"
+                }     
+  
+  post:
+    description: Admin creat
+    responses:
+      200:
+        body:
+          application/json:  
+           example:
+            {
+             message:admin inserted.
+            } 
+      401:
+        body:
+          application/json:
+            example:
+                 {
+                     message:"You don't have admin privilage"
+                 }    
+          
+  delete:
+    description: Admin delete
+    responses:
+      200:
+        body:
+          application/json:  
+           example:
+            {
+             message:admin delete the pro.
+            }
+      401:
+        body:
+          application/json:
+            example:
+                 {
+                     message:"You don't have admin privilage"
+                 }         
+           
+  put:
+    description: Admin update
+    responses:
+      200:
+        body:
+          application/json:  
+           example:
+            {
+             message:admin updated the product.
+            }
+      401:
+        body:
+          application/json:
+            example:
+                 {
+                     message:"You don't have admin privilage"
+                 }         
+    
+                  
+
+
+
+
+
+
+
+

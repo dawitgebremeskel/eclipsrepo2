@@ -1,0 +1,305 @@
+#%RAML 1.0 DocumentationItem
+title:
+content:
+/product:
+  get:
+   description: To get list of products.
+   responses:
+     200:
+       body:
+         application/json:
+           example: 
+            [
+              {
+               productid:113,
+               catagoryid:12,
+               name:"Google home",
+               describtion:"Google home lets you automate staff.it is cool",
+               video_url:"https://www.youtube.com/embed/roiLfAVopIG",
+               price:6000.
+              },
+              {
+               productid:114,
+               catagoryid:13,
+               name:"Google home",
+               describtion:"Google home lets you automate staff.it is cool",
+               video_url:"https://www.youtube.com/embed/roiLfAVopIG", 
+               price:5000
+              }
+               ]
+           
+     400:
+       description: Bad request.   
+       body:
+         application/json:
+           example:
+             {
+               message:"Bad request"
+             }     
+     401:
+       description: unauthonticate person.   
+       body:
+         application/json:
+           example:
+             {
+               message:"You don't have admin privilage"
+             }             
+     500:
+        description: server failer
+        body:
+          application/json:
+            example:
+              {
+                message:"server failer"
+              }
+     404:
+        description: not found
+        body:
+          application/json:
+            example:
+              {
+                message:"not found"
+              }   
+
+  /{productID}:
+    get:
+      description: To returen one product.
+      responses:
+        200:
+        body:
+          application/json:
+            example:
+                {
+                productid:113,
+                catagoryid:12,
+                name:"Google home",
+                describtion:"Google home lets you automate staff.it is cool",
+                video_url:"https://www.youtube.com/embed/roiLfAVopIG",
+                price:6000.
+                }
+        400:
+        description: Bad request.   
+        body:
+          application/json:
+            example:
+              {
+                message:"Bad request"
+              }     
+        401:
+          description: unauthonticate person.   
+          body:
+            application/json:
+              example:
+                {
+                  message:"You don't have admin privilage"
+                }             
+        500:
+            description: server failer
+            body:
+              application/json:
+                example:
+                  {
+                    message:"server failer"
+                  }
+        404:
+            description: not found
+            body:
+              application/json:
+                example:
+                  {
+                    message:"not found"
+                  }   
+    
+  /user:
+    get:
+    description: To return list of users.
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              [
+                {
+                user name:"dawit",
+                userid:1523,
+                orderid:002,
+                email:"dawit@gmail.com"
+              }  ,
+              {
+              username: "Piter",
+                userid: 1553,
+                orderid: 1515,
+                email: "piter@example.com"
+              }
+              ]
+      400:
+        description: Bad request.   
+        body:
+          application/json:
+            example:
+              {
+                message:"Bad request"
+              }     
+      401:
+        description: unauthonticate person.   
+        body:
+          application/json:
+            example:
+              {
+                message:"You don't have admin privilage"
+              }             
+      500:
+          description: server failer
+          body:
+            application/json:
+              example:
+                {
+                  message:"server failer"
+                }
+      404:
+          description: not found
+          body:
+            application/json:
+              example:
+                {
+                  message:"not found"
+                }   
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  message:"user updated"
+                }
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  message:"user information deleted"
+                }                                             
+
+    /{userID}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  {
+                  user name:"dawit",
+                  userid:1523,
+                  orderid:002,
+                  email:"dawit@gmail.com" 
+                  }
+          400:
+            description: Bad request.   
+            body:
+              application/json:
+                example:
+                  {
+                    message:"Bad request"
+                  }     
+          401:
+            description: unauthonticate person.   
+            body:
+              application/json:
+                example:
+                  {
+                    message:"You don't have admin privilage"
+                  }             
+          500:
+              description: server failer
+              body:
+                application/json:
+                  example:
+                    {
+                      message:"server failer"
+                    }
+          404:
+              description: not found
+              body:
+                application/json:
+                  example:
+                    {
+                      message:"not found"
+                    }     
+                          
+    post:
+      body:
+        application/json:
+          example:
+            {
+              user name:dawit,
+              email:dawit@gmail.com
+            }
+      responses:
+        201:
+          description: user account successfuly created.
+          body:
+            application/json:
+              example:
+                {
+                  userid:1523
+                }
+        500:
+          description: server failer
+          body:
+            application/json:
+              example:
+                {
+                  message:"server failer"
+                }
+        404:
+          description: not found
+          body:
+            application/json:
+              example:
+                {
+                  message:"not found"
+                }             
+        
+  /order:
+    get:
+    description: To return  list of products ordered.
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                msg:"All products order"
+              }  
+      400:
+        description: Bad request.        
+      404:
+        description: Product order not found.
+      500:
+        description: Server error.
+    post:
+      description: To send the order info to the server.
+      responses:
+        201:
+          description: order complited.
+        
+  /catagory:
+  get:
+    description: To return product by catagory ID.
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                msg:"All products from this catagory"
+              }  
+      400:
+        description: Bad request.        
+      404:
+        description: Product catagory order not found.
+      500:
+        description: Server error.
