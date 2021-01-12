@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d7d4c60f-fd20-46e1-a31a-815d4d20fa95" basePath="/">
+		<http:listener-connection host="0.0.0.0" port="8084" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="57b14b45-a986-4819-bb94-ebf1f4bc6292" basePath="/" >
+		<http:listener-connection host="0.0.0.0" port="8085" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config2" doc:name="HTTP Listener config" doc:id="c5d96581-5b1a-4e6e-b6e2-0e3ac83ae3f6" >
+		<http:listener-connection host="0.0.0.0" port="8086" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config3" doc:name="HTTP Listener config" doc:id="5b4ac8b7-5620-4d0c-99b5-13171bbf6d1c" >
+		<http:listener-connection host="0.0.0.0" port="8087" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config4" doc:name="HTTP Listener config" doc:id="8dddcbe5-661f-4f96-a9d1-21028ad29dbe" >
+		<http:listener-connection host="0.0.0.0" port="8088" />
+	</http:listener-config>
+	<flow name="getallproducts" doc:id="4f27b3dd-0edf-40c9-bc99-2f3cdceb4fc3" >
+		<http:listener doc:name="Listener" doc:id="82d05242-0600-45b2-b26e-99f5ec376f97" config-ref="HTTP_Listener_config" path="/products"/>
+		<ee:transform doc:name="Transform Message" doc:id="ee769508-41cf-4020-89ec-96619d12c65c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+	{
+               "productid":113,
+               "catagoryid":12,
+               "name":"Google home",
+               "describtion":"Google home lets you automate staff.it is cool",
+               "video_url":"https://www.youtube.com/embed/roiLfAVopIG",
+               "price":6000
+              },
+              {
+               "productid":114,
+               "catagoryid":13,
+               "name":"Google home",
+               "describtion":"Google home lets you automate staff.it is cool",
+               "video_url":"https://www.youtube.com/embed/roiLfAVopIG", 
+               "price":5000
+              }
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getonlyoneproduct" doc:id="0b2424af-d54e-4879-bc42-f62a4d40c115" >
+		<http:listener doc:name="Listener" doc:id="817f30b5-3a5e-4dfd-aa1b-5873e2657d5b" config-ref="HTTP_Listener_config1" path="/product/{id}"/>
+		<ee:transform doc:name="Transform Message" doc:id="4a629f28-fe94-439d-b1a4-102709ef815e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+	 {
+               "productid":113,
+               "catagoryid":12,
+               "name":"Google home",
+               "describtion":"Google home lets you automate staff.it is cool",
+               "video_url":"https://www.youtube.com/embed/roiLfAVopIG",
+               "price":6000
+              }
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getallusers" doc:id="4f2fb0f8-656e-4089-b6c8-82a4d5544b0f" >
+		<http:listener doc:name="Listener" doc:id="600422e1-4bb5-4c36-bc76-c35444c4a5e5" path="/users" config-ref="HTTP_Listener_config2"/>
+		<ee:transform doc:name="Transform Message" doc:id="0669a76b-9f20-4755-8b6c-925fd5675335" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+         {
+              "username":"dawit",
+              "userid":1523,
+              "orderid":122,
+              "email":"dawit@gmail.com"
+             }  ,
+             {
+              "username": "Piter",
+              "userid": 1553,
+              "orderid": 1515,
+              "email": "piter@example.com"
+             }
+ ]
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getoneuserbyid" doc:id="46bf35bd-3bad-4eca-8031-7c52ab4fa859" >
+		<http:listener doc:name="Listener" doc:id="3822f480-0902-4417-a9c5-de53d40689ba" config-ref="HTTP_Listener_config3" path="/user/{id}"/>
+		<ee:transform doc:name="Transform Message" doc:id="670ef43f-d295-49ee-81b7-f95915385ec8" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+	{
+                 "username":"dawit",
+                 "userid":1523,
+                 "orderid":452,
+                 "email":"dawit@gmail.com" 
+    }
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="postusers" doc:id="d63499b3-2b69-4704-b9e1-6b09b7e253cb" >
+		<http:listener doc:name="Listener" doc:id="cea0a4a5-03d3-49e3-bf1f-414d0bd076cc" config-ref="HTTP_Listener_config4" path="/postuser"/>
+		<ee:transform doc:name="Transform Message" doc:id="c33f9528-e8c6-4717-b08c-842a1c84294d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="postuserid" doc:id="a43e10ec-309b-4a86-b8f7-4af03a5c9b28" >
+		<http:listener doc:name="Listener" doc:id="933e7b10-fbeb-4418-bf9c-20eb0a5457a7" config-ref="HTTP_Listener_config4" path="/postuserid"/>
+		<ee:transform doc:name="Transform Message" doc:id="482ff65c-9ef9-49ee-99c4-d126b14c31a7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"userid":1556]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
