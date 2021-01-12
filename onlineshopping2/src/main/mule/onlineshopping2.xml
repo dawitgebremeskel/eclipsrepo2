@@ -130,7 +130,40 @@ payload
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-"userid":1556]]></ee:set-payload>
+"userid":2233]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getallorders" doc:id="ba83755e-149f-4b9e-ae49-b80feea28b38" >
+		<http:listener doc:name="Listener" doc:id="f2a406f5-d23b-4986-af66-84649ab433fe" config-ref="HTTP_Listener_config4" path="/orders"/>
+		<ee:transform doc:name="Transform Message" doc:id="a6628fe5-9976-4d36-afe5-3bf374783c9d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+      {
+      "orderid": 1503,
+      "userid": 1001,
+      "addressid": 201,
+      "discountid": 1,
+      "created": 1603214000000,
+      "modified": null,
+      "status": "Shipment Completed",
+      "amount": 1000
+   },
+      {
+      "orderid": 1504,
+      "userid": 1005,
+      "addressid": 201,
+      "discountid": 1,
+      "created": 1603214084000,
+      "modified": null,
+      "status": "Shipment Completed",
+      "amount": 1000
+   }
+
+]]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
